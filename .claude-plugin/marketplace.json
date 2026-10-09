@@ -1,0 +1,23 @@
+{
+  "name": "recall",
+  "description": "Recall: long-term memory for AI agents.",
+  "owner": {
+    "name": "Luc Smidt",
+    "email": "support@recallmem.dev"
+  },
+  "plugins": [
+    {
+      "name": "recall-memory",
+      "source": "./",
+      "description": "Long-term memory for Claude Code from Recall: recalls what it knows about you at session start, records your conversations so it keeps learning, and adds Recall's MCP tools.",
+      "category": "memory",
+      "tags": [
+        "memory",
+        "mcp",
+        "hooks"
+      ],
+      "homepage": "https://recallmem.dev",
+      "license": "MIT"
+    }
+  ]
+}
