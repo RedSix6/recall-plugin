@@ -8,13 +8,7 @@
     "email": "support@recallmem.dev",
     "url": "https://recallmem.dev"
   },
-  "keywords": [
-    "memory",
-    "recall",
-    "mcp",
-    "hooks",
-    "long-term-memory"
-  ],
+  "keywords": ["memory", "recall", "mcp", "hooks", "long-term-memory"],
   "homepage": "https://recallmem.dev",
   "repository": "https://github.com/RedSix6/recall-plugin",
   "license": "MIT",

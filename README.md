@@ -1,6 +1,6 @@
 # Recall memory for Claude Code
 
-A Claude Code plugin that gives Claude long-term memory through [Recall](../../README.md).
+A Claude Code plugin that gives Claude long-term memory through [Recall](https://recallmem.dev).
 
 - **Recall.** When a session starts (or resumes, or is compacted) it adds your peer card and the facts Recall
   has learned about you to Claude's context.
@@ -85,8 +85,17 @@ Hooks never print errors into the session. They log to `hooks.log` in the plugin
 (`${CLAUDE_PLUGIN_DATA}`, normally under `~/.claude/plugins/data/`); set `RECALL_DEBUG=1` to also see them on stderr.
 `/mcp` shows whether the `recall` tools connected.
 
+## Other agents
+
+The same repository has Recall for other agents, each with its own README:
+[Codex](https://github.com/RedSix6/recall-plugin/tree/main/integrations/codex),
+[OpenClaw](https://github.com/RedSix6/recall-plugin/tree/main/integrations/openclaw),
+[Hermes](https://github.com/RedSix6/recall-plugin/tree/main/integrations/hermes) and an
+[Agent Skill](https://github.com/RedSix6/recall-plugin/tree/main/integrations/agent-skill) for any host that loads
+skills. Any MCP client can also connect to `https://api.recallmem.dev/mcp`.
+
 ## Development
 
-The scripts in `scripts/` are the hook runtime shared with the Codex integration (`../codex/scripts`); only
-`host.mjs` differs. Change both copies together: `packages/server/test/codex-integration.test.ts` checks they match,
-and `packages/server/test/claude-plugin.test.ts` runs these hooks against a real Recall server.
+The scripts in `scripts/` are the hook runtime shared with the Codex integration; only `host.mjs` differs. This
+repository is published from Recall's main repository, where tests run every hook against a real Recall server.
+Issues and pull requests are welcome here; for anything else, write to support@recallmem.dev.
