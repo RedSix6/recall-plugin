@@ -20,7 +20,7 @@
   "license": "MIT",
   "icon": "./.claude-plugin/icon.png",
   "documentationUrl": "https://recallmem.dev/docs#claude-code",
-  "supportUrl": "https://github.com/RedSix6/recall-plugin/issues",
+  "supportUrl": "https://recallmem.dev/support",
   "userConfig": {
     "api_key": {
       "type": "string",
@@ -46,5 +46,7 @@
       "description": "How Recall refers to you. Empty uses your OS user name.",
       "default": ""
     }
-  }
+  },
+  "privacyPolicyUrl": "https://recallmem.dev/privacy",
+  "termsOfServiceUrl": "https://recallmem.dev/terms"
 }
