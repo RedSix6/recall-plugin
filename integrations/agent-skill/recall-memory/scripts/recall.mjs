@@ -28,7 +28,7 @@ Options
   --json                       print the server's JSON instead of text
 
 Settings come from RECALL_URL, RECALL_API_KEY, RECALL_WORKSPACE_ID and RECALL_PEER_ID,
-then ~/.recall/config.json (written by \`recall init\`), then ~/.honcho/config.json.`;
+then ~/.recall/config.json (written by \`recall init\`).`;
 
 const MAX_CHARS = 24_000;
 
@@ -47,7 +47,6 @@ function readConfigFile(env) {
   const home = env.HOME || env.USERPROFILE || homedir();
   const paths = [
     env.RECALL_CONFIG_PATH || join(env.RECALL_CONFIG_DIR || join(home, ".recall"), "config.json"),
-    env.HONCHO_CONFIG_PATH || join(env.HONCHO_CONFIG_DIR || join(home, ".honcho"), "config.json"),
   ];
   for (const path of paths) {
     try {
@@ -77,29 +76,20 @@ function settings(flags, env = process.env) {
   const url =
     str(flags.url) ??
     str(env.RECALL_URL) ??
-    str(env.HONCHO_URL) ??
     str(file.url ?? file.baseUrl ?? file.environmentUrl) ??
     "https://api.recallmem.dev";
   return {
     url: url.replace(/\/+$/, ""),
     apiKey:
-      str(flags["api-key"]) ??
-      str(env.RECALL_API_KEY) ??
-      str(env.HONCHO_API_KEY) ??
-      expand(file.apiKey ?? file.auth?.apiKey),
+      str(flags["api-key"]) ?? str(env.RECALL_API_KEY) ?? expand(file.apiKey ?? file.auth?.apiKey),
     workspace: safeId(
       str(flags.workspace) ??
         str(env.RECALL_WORKSPACE_ID) ??
-        str(env.HONCHO_WORKSPACE_ID) ??
         str(file.workspace ?? file.workspaceId),
       "default",
     ),
     peer: safeId(
-      str(flags.peer) ??
-        str(env.RECALL_PEER_ID) ??
-        str(env.HONCHO_PEER_NAME) ??
-        str(file.peer ?? file.peerName) ??
-        user,
+      str(flags.peer) ?? str(env.RECALL_PEER_ID) ?? str(file.peer ?? file.peerName) ?? user,
       "user",
     ),
   };

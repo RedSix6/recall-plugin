@@ -33,7 +33,6 @@ function readConfigFile(env) {
   const home = env.HOME || env.USERPROFILE || homedir();
   const paths = [
     env.RECALL_CONFIG_PATH || join(env.RECALL_CONFIG_DIR || join(home, ".recall"), "config.json"),
-    env.HONCHO_CONFIG_PATH || join(env.HONCHO_CONFIG_DIR || join(home, ".honcho"), "config.json"),
   ];
   for (const path of paths) {
     try {
@@ -73,38 +72,26 @@ export function resolveSettings(pluginConfig = {}, env = process.env) {
   })();
   const lookup = first(str(cfg.lookup), str(env.RECALL_LOOKUP), str(fromFile("lookup")));
   const url =
-    first(
-      str(cfg.url),
-      str(env.RECALL_URL),
-      str(env.HONCHO_URL),
-      str(fromFile("url", "baseUrl", "environmentUrl")),
-    ) ?? "https://api.recallmem.dev";
+    first(str(cfg.url), str(env.RECALL_URL), str(fromFile("url", "baseUrl", "environmentUrl"))) ??
+    "https://api.recallmem.dev";
   return {
     configPath: path,
     url: url.replace(/\/+$/, ""),
     apiKey: first(
       expand(cfg.apiKey),
       str(env.RECALL_API_KEY),
-      str(env.HONCHO_API_KEY),
       expand(fromFile("apiKey", "auth.apiKey")),
     ),
     workspace: safeId(
       first(
         str(cfg.workspace),
         str(env.RECALL_WORKSPACE_ID),
-        str(env.HONCHO_WORKSPACE_ID),
         str(fromFile("workspace", "workspaceId")),
       ),
       "default",
     ),
     peer: safeId(
-      first(
-        str(cfg.peer),
-        str(env.RECALL_PEER_ID),
-        str(env.HONCHO_PEER_NAME),
-        str(fromFile("peer", "peerName")),
-        user,
-      ),
+      first(str(cfg.peer), str(env.RECALL_PEER_ID), str(fromFile("peer", "peerName")), user),
     ),
     assistantPeer: safeId(
       first(str(cfg.assistantPeer), str(env.RECALL_ASSISTANT_PEER), str(fromFile("assistantPeer"))),

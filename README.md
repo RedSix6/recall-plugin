@@ -51,8 +51,8 @@ In a new session, ask Claude "what do you know about me?": the answer draws on t
 
 ## Configuration
 
-Settings are read, per setting, from the environment (`RECALL_*`), then `~/.recall/config.json`. Honcho's config
-and `HONCHO_*` variables are never read, so no other service's credentials reach Recall. A `hosts.claude-code` object in the file overrides its top
+Settings are read, per setting, from the environment (`RECALL_*`), then `~/.recall/config.json`. No other
+service's config or variables are read, so no other service's credentials reach Recall. A `hosts.claude-code` object in the file overrides its top
 level, e.g. `{"hosts": {"claude-code": {"workspace": "coding", "assistantPeer": "claude"}}}`.
 
 | Setting (file key / env) | Default | |

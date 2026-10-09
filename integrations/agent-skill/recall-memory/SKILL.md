@@ -1,6 +1,6 @@
 ---
 name: recall-memory
-description: Long-term memory about the user through Recall, a Honcho-compatible memory server. Use when earlier conversations would help (the user's preferences, background, past decisions, ongoing projects), when the user asks you to remember, recall or forget something, or when a conversation should be recorded so memory can learn from it. Works through Recall's MCP tools when they are connected, or its REST API with the bundled script.
+description: Long-term memory about the user through Recall, a memory server for AI agents. Use when earlier conversations would help (the user's preferences, background, past decisions, ongoing projects), when the user asks you to remember, recall or forget something, or when a conversation should be recorded so memory can learn from it. Works through Recall's MCP tools when they are connected, or its REST API with the bundled script.
 compatibility: Needs network access to a Recall server (RECALL_URL, plus RECALL_API_KEY when the server has auth on). The helper script needs Node.js 18 or later.
 metadata:
   author: Recall

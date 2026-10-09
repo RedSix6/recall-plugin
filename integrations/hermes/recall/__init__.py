@@ -1,6 +1,6 @@
 """Recall memory provider for Hermes Agent.
 
-Gives Hermes long-term memory from a Recall server (Honcho-compatible REST API):
+Gives Hermes long-term memory from a Recall server (REST API):
 
 * prefetch() adds what Recall knows about the user, focused on the message at hand;
 * sync_turn() records each completed exchange, in the background and in order;

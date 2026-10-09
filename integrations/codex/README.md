@@ -53,7 +53,7 @@ off, since it tells Codex what the tools are for).
 ## Configuration
 
 Settings come, per setting, from the environment, then `~/.recall/config.json` (as written by `recall init` or the
-installer). Honcho's config and `HONCHO_*` variables are never read. A `hosts.codex` object in the file overrides its top level, e.g.
+installer); no other service's config or variables are read. A `hosts.codex` object in the file overrides its top level, e.g.
 `{"hosts": {"codex": {"workspace": "coding"}}}`.
 
 | Setting (file key / env) | Default | |

@@ -1,6 +1,6 @@
 name: recall
 version: 0.1.0
-description: "Recall: long-term memory that learns from your conversations (Honcho-compatible server)."
+description: "Recall: long-term memory that learns from your conversations."
 author: Recall
 kind: exclusive
 provides_tools:
