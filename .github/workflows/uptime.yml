@@ -1,0 +1,35 @@
+# Checks recallmem.dev every 10 minutes. A failed run means a check stayed down for three tries
+# over about 30 seconds; GitHub emails the repository owner about failed scheduled runs.
+name: Uptime
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency: uptime
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: API, site, dashboard and OAuth discovery answer
+        run: |
+          down=0
+          check() {
+            for attempt in 1 2 3; do
+              code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 "$1" || true)
+              if [ "$code" = "$2" ]; then echo "ok    $1 ($code)"; return; fi
+              sleep 10
+            done
+            echo "::error::$1 answered $code, expected $2"
+            down=1
+          }
+          check https://api.recallmem.dev/health 200
+          check https://recallmem.dev/ 200
+          check https://app.recallmem.dev/login 200
+          check https://api.recallmem.dev/.well-known/oauth-authorization-server 200
+          exit $down
