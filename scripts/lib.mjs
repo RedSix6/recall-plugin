@@ -85,7 +85,7 @@ export function loadSettings(env = process.env) {
   const assistant = HOST_INFO.assistantPeer;
 
   const url =
-    fromEnv("RECALL_URL", "RECALL_BASE_URL") ??
+    fromEnv("CLAUDE_PLUGIN_OPTION_URL", "RECALL_URL", "RECALL_BASE_URL") ??
     str(pickFile("url", "baseUrl", "environmentUrl")) ??
     "https://api.recallmem.dev";
   const username = (() => {
@@ -103,15 +103,15 @@ export function loadSettings(env = process.env) {
     configPath: path,
     enabled: !(off(env.RECALL_ENABLED) || pickFile("enabled") === false),
     url: url.replace(/\/+$/, ""),
-    apiKey: fromEnv("RECALL_API_KEY") ?? str(expand(pickFile("apiKey", "auth.apiKey"), env)),
+    apiKey: str(HOST_INFO.apiKey(env, (...keys) => expand(pickFile(...keys), env))),
     workspace: safeId(
-      fromEnv("RECALL_WORKSPACE_ID", "RECALL_WORKSPACE") ??
+      fromEnv("CLAUDE_PLUGIN_OPTION_WORKSPACE", "RECALL_WORKSPACE_ID", "RECALL_WORKSPACE") ??
         str(pickFile("workspace", "workspaceId")) ??
         "default",
       "default",
     ),
     peer: safeId(
-      fromEnv("RECALL_PEER_ID", "RECALL_PEER_NAME") ??
+      fromEnv("CLAUDE_PLUGIN_OPTION_PEER", "RECALL_PEER_ID", "RECALL_PEER_NAME") ??
         str(pickFile("peer", "peerName")) ??
         username,
     ),

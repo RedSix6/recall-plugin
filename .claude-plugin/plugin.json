@@ -17,5 +17,34 @@
   ],
   "homepage": "https://recallmem.dev",
   "repository": "https://github.com/RedSix6/recall-plugin",
-  "license": "MIT"
+  "license": "MIT",
+  "icon": "./.claude-plugin/icon.png",
+  "documentationUrl": "https://recallmem.dev/docs#claude-code",
+  "supportUrl": "https://github.com/RedSix6/recall-plugin/issues",
+  "userConfig": {
+    "api_key": {
+      "type": "string",
+      "title": "Recall API key",
+      "description": "Create one at https://app.recallmem.dev/keys. Stored in your system's secure credential store.",
+      "sensitive": true
+    },
+    "url": {
+      "type": "string",
+      "title": "Recall server URL",
+      "description": "Leave as is for the hosted service; set your own URL to self-host.",
+      "default": "https://api.recallmem.dev"
+    },
+    "workspace": {
+      "type": "string",
+      "title": "Workspace",
+      "description": "Recall workspace to keep this memory in.",
+      "default": "default"
+    },
+    "peer": {
+      "type": "string",
+      "title": "Your name in memory",
+      "description": "How Recall refers to you. Empty uses your OS user name.",
+      "default": ""
+    }
+  }
 }

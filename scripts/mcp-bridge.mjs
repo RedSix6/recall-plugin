@@ -5,6 +5,7 @@
 // config files. Recall's MCP endpoint is stateless, so forwarding is all there is to it.
 
 import { createInterface } from "node:readline";
+import { HOST_INFO } from "./host.mjs";
 import { HOST, loadSettings, PLUGIN_VERSION } from "./lib.mjs";
 
 const settings = loadSettings();
@@ -70,7 +71,7 @@ async function forward(message) {
         const d = JSON.parse(text).detail;
         if (typeof d === "string") detail = d;
       } catch {}
-      const hint = res.status === 401 ? " Set RECALL_API_KEY or run `recall init`." : "";
+      const hint = res.status === 401 ? ` ${HOST_INFO.keyHint}` : "";
       return fail(message, `Recall answered HTTP ${res.status} at ${endpoint}: ${detail}.${hint}`);
     }
     for (const reply of replies(text, res.headers.get("content-type") ?? "")) send(reply);

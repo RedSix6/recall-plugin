@@ -27,16 +27,13 @@ Needs Claude Code with plugin support and Node 18+ on your `PATH`.
 (`claude plugin marketplace add RedSix6/recall-plugin` and `claude plugin install recall-memory@recall` do the same
 from a shell. Developing locally? `claude --plugin-dir integrations/claude-code`.)
 
-Then tell it where Recall is. Either run the CLI once:
-
-```bash
-recall init --url https://your-recall.example --api-key pk_live_... -w my-workspace -p your-name
-```
-
-or set environment variables (`RECALL_URL`, `RECALL_API_KEY`, `RECALL_WORKSPACE_ID`, `RECALL_PEER_ID`). With
-neither it uses the hosted service at `https://api.recallmem.dev` (get a key at https://app.recallmem.dev),
-workspace `default`, and your OS user name as your peer. Self-hosting: run `recall start` and set
-`RECALL_URL=http://localhost:8000`; no API key is needed until you turn auth on.
+When you enable the plugin, Claude Code asks for your **Recall API key** (create one at
+https://app.recallmem.dev/keys). It is stored in your system's secure credential store, and you can change it, the
+server URL, workspace and your name any time under `/plugin` → recall-memory → Configure. The defaults are the hosted
+service at `https://api.recallmem.dev`, workspace `default`, and your OS user name. Self-hosting: set the server URL
+to your own, e.g. `http://localhost:8000` (`recall start`); no API key is needed until you turn auth on. The URL,
+workspace and peer can also come from `RECALL_URL`, `RECALL_WORKSPACE_ID`, `RECALL_PEER_ID` or
+`~/.recall/config.json`; the key only ever comes from the plugin setting.
 
 Restart Claude Code (or run `/reload-plugins`), then run `/recall-memory:status`: it prints the settings in use
 and whether the server answers and accepts your key. `/mcp` shows whether the `recall` tools connected.
@@ -61,7 +58,7 @@ level, e.g. `{"hosts": {"claude-code": {"workspace": "coding", "assistantPeer": 
 | Setting (file key / env) | Default | |
 |---|---|---|
 | `url` / `RECALL_URL` | `https://api.recallmem.dev` | Server base URL |
-| `apiKey` / `RECALL_API_KEY` | none | API key (`${VAR}` placeholders allowed in the file) |
+| plugin setting `api_key` | none | API key (only from the plugin's protected setting) |
 | `workspace` / `RECALL_WORKSPACE_ID` | `default` | Where memory lives |
 | `peer` / `RECALL_PEER_ID` | your OS user | You, as Recall knows you. Keep it stable |
 | `assistantPeer` / `RECALL_ASSISTANT_PEER` | `claude` | Peer that Claude's replies are recorded as |
